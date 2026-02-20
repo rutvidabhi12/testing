@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Registration</title>
+
+<script>
+function validateForm() {
+
+    let firstName = document.forms["regForm"]["firstName"].value;
+    let lastName = document.forms["regForm"]["lastName"].value;
+    let password = document.forms["regForm"]["password"].value;
+    let confirmPassword = document.forms["regForm"]["confirmPassword"].value;
+    let email = document.forms["regForm"]["email"].value;
+    let mobile = document.forms["regForm"]["mobile"].value;
+    let address = document.forms["regForm"]["address"].value;
+    let role = document.forms["regForm"]["role"].value;
+
+    let namePattern = /^[A-Za-z]{6,}$/;
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let mobilePattern = /^[0-9]{10}$/;
+
+    if (!namePattern.test(firstName)) {
+        alert("First Name must contain only alphabets and at least 6 characters.");
+        return false;
+    }
+
+    if (!namePattern.test(lastName)) {
+        alert("Last Name must contain only alphabets and at least 6 characters.");
+        return false;
+    }
+
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return false;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+    }
+
+    if (!emailPattern.test(email)) {
+        alert("Invalid email format.");
+        return false;
+    }
+
+    if (!mobilePattern.test(mobile)) {
+        alert("Mobile number must contain exactly 10 digits.");
+        return false;
+    }
+
+    if (address.trim() === "") {
+        alert("Address cannot be empty.");
+        return false;
+    }
+
+    if (role === "") {
+        alert("Please select a user role.");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+</head>
+<body>
+<div class="container">
+<h2>User Registration Form</h2>
+<link rel="stylesheet" type="text/css" href="design.css">
+
+<form name="regForm" action="register" method="post" onsubmit="return validateForm()">
+
+First Name: <input type="text" name="firstName" required><br><br>
+Last Name: <input type="text" name="lastName" required><br><br>
+Password: <input type="password" name="password" required><br><br>
+Confirm Password: <input type="password" name="confirmPassword" required><br><br>
+E-mail: <input type="email" name="email" required><br><br>
+Mobile Number: <input type="number" name="mobile" required><br><br>
+Address: <textarea name="address" required></textarea><br><br>
+
+User Role:
+<select name="role" required>
+    <option value="">--Select Role--</option>
+    <option value="Admin">Admin</option>
+    <option value="RegisteredUser">Registered User</option>
+    <option value="Guest">Guest</option>
+</select><br><br>
+
+<input type="submit" value="Register">
+
+</form>
+</div>
+</body>
+</html>
